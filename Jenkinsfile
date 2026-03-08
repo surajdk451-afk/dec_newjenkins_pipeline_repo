@@ -1,24 +1,26 @@
-pipeline{
+pipeline {
     agent any
-    
-    stages{
-        stage('STAGE1'){
-            steps{
-                echo "this is the stage 1"
-                sh'''
-                    sleep 5
-                    echo "this is linux command" 
-                '''
+    stages {
+        stage ('STAGE1') {
+            steps {
+               sh'''sleep 5
+                   echo "this is the first stage"
+               '''
             }
-        }    stage('build'){
-            steps{
-                echo "building java code"
+            
+    
+        }
+        stage ('STAGE2') {
+            steps {
                 sh'''
                     #!/bin/bash
-                    mvn clean install
+                    pwd
+                    ls -lrt
+                    sleep 5
+                    echo "this is the second stage"
                 '''
-                }   
-    }   }   }   
-            
-            
-}               
+            }
+
+        }                
+    }
+}
