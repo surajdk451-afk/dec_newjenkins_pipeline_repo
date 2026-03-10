@@ -1,0 +1,41 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('Build') {
+            agent { label 'master' }
+            steps {
+                echo "Building the application on master node..."
+                sh '''
+                    #!/bin/bash
+                    echo "Executing build commands"
+                    # Add your build commands here
+                '''
+            }
+        }
+        
+        stage('Test') {
+            agent { label 'slave1' }
+            steps {
+                echo "Running tests on slave1 node..."
+                sh '''
+                    #!/bin/bash
+                    echo "Executing test commands"
+                    # Add your test commands here
+                '''
+            }
+        }
+        
+        stage('Deploy') {
+            agent { label 'slave2' }
+            steps {
+                echo "Deploying application on slave2 node..."
+                sh '''
+                    #!/bin/bash
+                    echo "Executing deploy commands"
+                    # Add your deploy commands here
+                '''
+            }
+        }
+    }
+}
